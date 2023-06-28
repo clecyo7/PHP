@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700" rel="stylesheet">
+    <title>Série de TV</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="box">
+            <h1>Próxima Série</h1>
+            <div>
+                <label for="datetime">Data e Hora (opcional):</label>
+                <input type="datetime-local" id="datetime" name="datetime">
+            </div>
+            <div>
+                <label for="series">Série de TV (opcional):</label>
+                <select id="series" name="series">
+                    <option value="">Selecione</option>
+                    <option value="1">Chicago Med</option>
+                    <option value="2">Prison Break</option>
+                    <option value="3">A Escuta</option>
+                </select>
+            </div>
+            <button onclick="getSeries()" id="btnVerificar">Próxima Série de TV</button>
+            <div id="result"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    const datetime = document.getElementById('datetime').value;
+    const seriesId = document.getElementById('series').value;
+
+    if (datetime || seriesId) {
+        function getSeries() {
+            
+            const datetime = document.getElementById('datetime').value;
+            const seriesId = document.getElementById('series').value;
+
+            
+            let url = 'getSeries.php?datetime=' + encodeURIComponent(datetime);
+            url += '&seriesId=' + encodeURIComponent(seriesId);
+
+           
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const result = JSON.parse(xhr.responseText);
+
+                 
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = `
+        <h2>Próxima Série de TV:</h2>
+        <p>Título: ${result.titulo}</p>
+        <p>Canal: ${result.canal}</p>
+        <p>Gênero: ${result.genero}</p>
+      `;
+                }
+            };
+            xhr.send();
+        }
+
+    }
+</script>
+<style>
+    body {
+        margin: 20px;
+        font-family: "Nunito", Helvetica, sans-serif;
+    }
+
+    #container {
+        width: 100vw;
+        height: 100vh;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: #6C7A89;
+    }
+
+    #box {
+        width: 350px;
+        height: 450px;
+        background: #fff;
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    label {
+        font-weight: bold;
+        text-align: center;
+    }
+
+
+    input[type="text"],
+    input[type="datetime-local"] {
+        margin-bottom: 10px;
+        margin: 10px;
+    }
+
+    #btnVerificar {
+        font-weight: bold;
+        background: green;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    #result {
+        background: white;
+        margin-top: 20px;
+    }
+</style>

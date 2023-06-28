@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste G4F</title>
+</head>
+
+<body>
+    <ul id="output"></ul>
+
+</body>
+
+</html>
+
+<script>
+
+    const list = document.getElementById('output');
+
+    function renderNumber() {
+        for (let i = 1; i <= 100; i++) {
+            const multiples = [];
+
+            for (let j = 1; j <= i; j++) {
+                if (i % j === 0) {
+                    multiples.push(j)
+                }
+            }
+
+            const li = document.createElement('li');
+            li.textContent = `${i} [${multiples},]`
+
+            if (numberPrime(i)) {
+                li.textContent += ['Primo']
+            }
+            output.appendChild(li)
+        }
+    }
+
+    function numberPrime(num) {
+        for (var i = 2; i < num; i++) {
+            if (num % i === 0) {
+                return false;
+            }
+        }
+        return num !== 1
+    }
+
+
+
+    renderNumber();
+
+</script>
+
+<style>
+    ul {
+        list-style-type: none;
+        padding: 0;
+        border: 1px solid #ddd;
+        width: 30%;
+        text-align: center;
+        font-family: Montserrat, Arial, sans-serif;
+        background: #fafafa;
+        margin: 0 auto;
+    }
+
+    li {
+        padding: 8px 16px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    li:nth-child(even) {
+  background:lightgray;
+}
+</style>
