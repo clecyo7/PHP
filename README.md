@@ -15,4 +15,4 @@
 - Abra o pasta teste php e depois arrayAscii ex: http://localhost/teste%20php/arrayAscii/.
 - Para o teste 3 será necesário criar um banco de dados com o seguinte nome series_tv.
 - Execute o arquivo createTable.php da pasta series - ele ira popular o banco de dados ex: http://localhost/teste%20php/series/createTable.php.
-- Após isso abra o index.html da mesma pasta, escolha as séries pela data ou pelo nome.
+- Após isso abra o index.html da mesma pasta http://localhost/teste%20php/series/, escolha as séries pela data ou pelo nome.
